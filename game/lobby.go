@@ -470,6 +470,13 @@ func advanceLobby(lobby *Lobby) {
 
 	lobby.Drawer = newDrawer
 	lobby.Drawer.State = Drawing
+
+	if len(lobby.CustomWords) > 1 {
+		rand.Shuffle(len(lobby.CustomWords), func(i, j int) {
+			lobby.CustomWords[i], lobby.CustomWords[j] = lobby.CustomWords[j], lobby.CustomWords[i]
+		})
+	}
+
 	lobby.WordChoice = GetRandomWords(lobby)
 
 	recalculateRanks(lobby)
